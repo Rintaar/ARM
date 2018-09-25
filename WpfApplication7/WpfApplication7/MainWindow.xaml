@@ -1,0 +1,515 @@
+﻿<Window x:Class="WpfApplication7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication7"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1375"
+        Background="Black">
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Name="border" VerticalAlignment="Stretch"
+                    TextBlock.Foreground="LightGray"  TextBlock.TextAlignment="Center" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF787878" Offset="0"/>
+                        <GradientStop Color="#FF3E3E3E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter VerticalAlignment="Center" RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="border" Property="BorderBrush" Value="#FFB1D4FF"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="border" Property="Opacity" Value="0.5"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+
+        <Grid Name="parentGrid" Margin="10,10,-10,-10" >
+            <TabControl x:Name="ARMPanel" Background="Black" Height="656" VerticalAlignment="Top" Width="800" BorderThickness="0" Margin="278,-32,280,0" BorderBrush="#FF1F1F1F">
+                <TabItem Name="RightPanel" Header="RigtPanel" Margin="0,14,-4,-16" >
+                    <Grid Opacity="1"  Height="600" Width="800" Background="#FF3A3A3A" Margin="0,0,-4,15" VerticalAlignment="Bottom"  >
+                        <Image x:Name="_03_png" Height="749" Canvas.Left="5" Source="C:\Users\Blackwhiter\Desktop\Diplom\23.png" Stretch="Fill" Margin="-169,-27,-1,-122" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                        <Canvas Name="right_main" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="800" Background="#FF3A3A3A" Opacity="1" Margin="-1,0,0,0" >
+                            <Canvas Name="leftPartPanel">
+
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="79" Canvas.Left="4" Canvas.Top="467" Width="156" FontSize="16" Content="&lt; основной экран"  x:Name="return_to_main" Click="return_to_main_Click" IsEnabled="False"/>
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="39"  Canvas.Left="4" Canvas.Top="9"  Width="156" FontSize="16" Content="полоса 1" x:Name="road" />
+                                <Image x:Name="_1_png" Height="117" Canvas.Left="37" Source="Images/1.png" Stretch="Fill" Canvas.Top="125" Width="93"/>
+
+                                <Image x:Name="_2_png" Height="96" Source="Images/2.png" Stretch="Fill" Canvas.Top="244" Width="96"  Opacity="1" Canvas.Left="36" />
+                                <Image x:Name="_22_png" Height="96" Source="Images/2.2.png" Stretch="Fill" Canvas.Top="244" Width="96" Visibility="Collapsed" Opacity="1" Canvas.Left="36" />
+                                <Image x:Name="_3_png" Height="122" Canvas.Left="35" Source="Images/3.png" Stretch="Fill" Canvas.Top="340" Width="95"/>
+                                <Image x:Name="_4_png" Height="41" Canvas.Left="67" Source="Images/4.png" Stretch="Fill" Canvas.Top="79" Width="32"/>
+                                <Label x:Name="countlabel" HorizontalContentAlignment="Center" Foreground="White" Content="0" Height="29" Canvas.Left="62" Canvas.Top="83" Width="42" FontFamily="Arial Black" FontSize="18" RenderTransformOrigin="1.852,0.483"/>
+                                <Image x:Name="_11_png" Height="116" Canvas.Left="37" Source="Images/1.1.png" Stretch="Fill" Canvas.Top="125" Width="93" Visibility="Hidden"/>
+                                <Canvas x:Name="TimePanel1" Canvas.Top="558" Height="40" Width="174" Canvas.Left="-3">
+                                    <Label x:Name="timelabel" Content="18:24" Height="42" Foreground="#FFB0B0B0" Canvas.Left="78" Width="97" FontSize="28" FontFamily="Segoe UI" FontWeight="Bold" Canvas.Top="-2" />
+                                    <Label x:Name="datelabel" Content="25.12.2013 " Foreground="#FFB0B0B0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="69" FontSize="12" Canvas.Left="4"/>
+                                </Canvas>
+                            </Canvas>
+                            <TabControl x:Name="RightPanels" Height="607" Canvas.Left="177" Width="615" BorderThickness="0" Background="#FF3A3A3A" Canvas.Top="-14">
+                                <TabItem Name ="Waiting" Header="Waiting">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,0,0,-1"/>
+                                        <Label x:Name="label_authorisation" Padding="0" FontSize="25" Foreground="#FFC5C5C5" Content="Ожидание авторизации" Canvas.Left="203" Margin="166,-1,139,548"/>
+                                        <Label x:Name="label_authorisation_text" Padding="0" FontSize="22" Foreground="#FFC5C5C5" Content="Приложите вашу персональную бесконтактную&#xA;смарт карту к считывателю, чтобы ввести пароль&#xA;и приступить к работе" Canvas.Left="66" Canvas.Top="575" Margin="54,449,41,21"/>
+                                        <MediaElement x:Name="mediaElement" Canvas.Left="66" Canvas.Top="51"  LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="55,38,55,169" />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="Autorisation" Header="Autorisation">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,0,0,-1"/>
+                                        <TextBox x:Name="enter_pass"  Padding="5" Foreground="#FFC5C5C5" Canvas.Left="55"  Text="Введите пароль доступа" Canvas.Top="140" FontFamily="Arial Black" FontSize="33" GotFocus="enter_pass_GotFocus" Cursor="Arrow" IsHitTestVisible="True"  Margin="43,110,44,414" TextChanged="enter_pass_TextChanged"/>
+                                        <Label x:Name="label_parol" Padding="0" FontSize="26" Foreground="#FFC5C5C5" Content="Введите пароль для продолжения работы" Height="46" Canvas.Left="65" Margin="50,-2,56,537"/>
+                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="55" Canvas.Top="322" FontSize="18" Content="Войти"  x:Name="button_enter"  Margin="43,250,406,283" Click="button_enter_Click" />
+                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="55" Canvas.Top="646" FontSize="18" Content="Отмена" x:Name="button_exit"  Margin="43,504,406,29" Click="button_exit_Click" />
+                                        <Canvas Name="Calculate" Canvas.Left="435" Canvas.Top="330" Margin="340,258,61,42">
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="149" Width="61" FontSize="30" Content="1" x:Name="button1"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="149" Width="61" FontSize="30" Content="2" x:Name="button2"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="149" Width="61" FontSize="30" Content="3" x:Name="button3"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="74" Width="61" FontSize="30" Content="4" x:Name="button4"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="74" Width="61" FontSize="30" Content="5" x:Name="button5"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="74" Width="61" FontSize="30" Content="6" x:Name="button6"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Width="61" FontSize="30" Content="7" x:Name="button7"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Width="61" FontSize="30" Content="8" x:Name="button8"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Width="61" FontSize="30" Content="9" x:Name="button9"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="222" Width="61" FontSize="30" Content="," x:Name="button_float"  Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="222" Width="61" FontSize="30" Content="&#213;" x:Name="button_back" Click="button_backClick"  Height="61"  FontFamily="Wingdings" FontWeight="ExtraBold" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="222" Width="61" FontSize="30" Content="0" x:Name="button0"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click" />
+                                        </Canvas>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="Warning" Header="Warning">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="-1,1,1,-2"/>
+                                        <Label x:Name="label_text" Padding="0" HorizontalContentAlignment="Center" FontSize="21" Foreground="#FFC5C5C5" Content="Прежде чем приступить к работе выполните все&#xA;                  нижеперечисленные задачи" Canvas.Left="45" Canvas.Top="17" Margin="37,13,74,492"/>
+                                        <Label x:Name="label_text1" Padding="0" FontSize="21" Foreground="#FFC5C5C5" Content="1. Убедитесь в наличии чековой ленты в &#xD;&#xA;фиксальном регистраторе&#xD;&#xA;&#xD;&#xA;2. Внесите разменный фонд&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;3. Откройте полосу" Canvas.Left="29" Canvas.Top="155" Margin="25,122,138,244"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Start" Content="Приступить к работе" FontSize="16" Canvas.Left="39" Canvas.Top="516" Margin="29,402,331,137" Click="Start_Click"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Cancel" Content="Отмена" FontSize="17" Canvas.Left="39" Canvas.Top="620"  Margin="29,485,331,57" Click="Cancel_Click"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="TechPanel" Header="TechPanel" >
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="-1,0,1,-1"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="PrintTicket" Content="Печать билета" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="51,201,369,340"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="TwiseCheck" Content="Дублировать чек" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="51,106,369,435"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Return_money" Content="Возврат средств" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="51,358,369,183"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="GEtTSfree" Content="Выпуск ТС" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="51,404,369,137" IsEnabled="False"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="EndWork" Content="Завершение смены" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="365,449,55,92" Click="EndWork_Click"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="PayMoney" Content="Выплатить" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="365,358,55,183" Click="PayMoney_Click"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Inputmoney" Content="Внести" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="365,313,55,228" Click="Inputmoney_Click"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Zprint" Content="Z-отчет" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="365,152,55,389" IsEnabled="False"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Xprint" Content="X-отчет" FontSize="16" Canvas.Left="39" Canvas.Top="620"  Margin="365,106,55,435"/>
+                                        <Label x:Name="label_text_Copy" Padding="0" HorizontalContentAlignment="Center" FontSize="21" Foreground="#FFC5C5C5" Content="                                            Технологическая панель&#xA;                  управления транзакцией          управления сменой" Margin="-118,7,20,498"/>
+                                        <Label x:Name="ашчЗкшт1" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="фиксальный принтер" Margin="25,77,386,471"/>
+                                        <Label x:Name="ашчЗкшт1_Copy" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="фиксальный принтер" Margin="339,77,72,471"/>
+                                        <Label x:Name="ашчЗкшт1_Copy1" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="БСК" Margin="24,170,510,387"/>
+                                        <Label x:Name="ашчЗкшт1_Copy2" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="прочее" Margin="40,327,503,221"/>
+                                        <Label x:Name="ашчЗкшт1_Copy3" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="прочее" Margin="355,419,188,129"/>
+                                        <Label x:Name="ашчЗкшт1_Copy4" Padding="0" HorizontalContentAlignment="Center" FontSize="15" Foreground="#FFC5C5C5" Content="наличные деньги" Margin="355,280,113,268"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="InsertMoney" Header="InsertMoney">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,0,0,-1"/>
+                                        <Rectangle Fill="#FF646464" RadiusX="10" RadiusY="10" Margin="8,257,6,10"/>
+                                        <Canvas Name="Calculate1" Canvas.Left="435" Canvas.Top="330" Margin="373,278,28,22">
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="149" Width="61" FontSize="30" Content="1" x:Name="b1utton1"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="149" Width="61" FontSize="30" Content="2" x:Name="b1utton2"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="149" Width="61" FontSize="30" Content="3" x:Name="b1utton3"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="74" Width="61" FontSize="30" Content="4" x:Name="b1utton4"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="74" Width="61" FontSize="30" Content="5" x:Name="b1utton5"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="74" Width="61" FontSize="30" Content="6" x:Name="b1utton6"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Width="61" FontSize="30" Content="7" x:Name="b1utton7"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Width="61" FontSize="30" Content="8" x:Name="b1utton8"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Width="61" FontSize="30" Content="9" x:Name="b1utton9"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="222" Width="61" FontSize="30" Content="," x:Name="b1utton_float"  Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM1" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="222" Width="61" FontSize="30" Content="&#213;" x:Name="b1utton_back" Click="button_backClick1"  Height="61"  FontFamily="Wingdings" FontWeight="ExtraBold" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="222" Width="61" FontSize="30" Content="0" x:Name="b1utton0"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click1" />
+                                        </Canvas>
+                                        <TextBox x:Name="calculate_box1"  FontFamily="Arial Black" TextChanged="enter_pass_TextChanged" GotFocus="enter_pass_GotFocus" Cursor="No" IsHitTestVisible="True" Foreground="#FF3A3A3A" HorizontalAlignment="Left" TextAlignment="Right" Height="50" Margin="90,278,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="221" FontSize="39" FontWeight="Bold"/>
+                                        <Label x:Name="lab_Copy5" Padding="0" HorizontalContentAlignment="Center" FontSize="22" Foreground="#FFC5C5C5" Content="Внести деньги" Margin="204,2,207,546"/>
+                                        <Label x:Name="lab_Copy" Padding="0" HorizontalContentAlignment="Center" FontSize="25" Foreground="#FFC5C5C5" Content="сумма:" Margin="-1,291,520,257"/>
+                                        <Label x:Name="lab_Copy1" Padding="0" HorizontalContentAlignment="Left" FontSize="25" Foreground="#FFC5C5C5" Content="руб." Margin="316,293,243,255"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Input_money" Content="Внести" FontSize="16"  Margin="80,483,346,39" Click="Input_money_Click"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="contrWay" Header="contrWay">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,0,0,-1"/>
+
+                                        <MediaElement x:Name="mediaElement2" HorizontalAlignment="Left" Height="377" VerticalAlignment="Top" Width="502" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Canvas.Left="67" Canvas.Top="50" Margin="54,37,0,0"/>
+                                        <Label x:Name="label_options" Padding="0" FontSize="22" Foreground="#FFC5C5C5" Content="Управление полосой" Canvas.Left="242" Canvas.Top="4" Margin="198,0,169,551"/>
+                                        <Canvas HorizontalAlignment="Left" Height="135" Margin="65,433,0,0" VerticalAlignment="Top" Width="478">
+                                            <Image x:Name="groupwhitepanel_png" Canvas.Left="246" Source="Images/groupwhitepanel.png" Stretch="Fill" Canvas.Top="36" Width="232" Height="97" />
+                                            <Image x:Name="openclose1_png" Source="Images/openclose1.png" Stretch="Fill" Canvas.Top="47" Width="235" Height="41"/>
+                                            <Image x:Name="openclose1_png_Copy" Source="Images/openclose1.png" Stretch="Fill" Canvas.Top="91" Width="235" />
+                                            <Image x:Name="openclose2_png" Source="Images/openclose2.png" Stretch="Fill" Height="41" Width="235" Canvas.Top="2"/>
+                                            <Image x:Name="openclose1_png_Copy1" Source="Images/openclose1.png" Stretch="Fill" Canvas.Left="245" Height="42" Width="233" RenderTransformOrigin="0.5,0.5" Canvas.Top="2" >
+                                                <Image.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform AngleY="0.245"/>
+                                                        <RotateTransform/>
+                                                        <TranslateTransform Y="-0.496"/>
+                                                    </TransformGroup>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                            <Button Template="{DynamicResource ButtonTemplate}" Canvas.Left="118" FontSize="14" Content="Разрешить въезд" x:Name="car_check" Click="car_check_Click" Canvas.Top="2" Width="117" Height="40" />
+                                            <Button Template="{DynamicResource ButtonTemplate}" Canvas.Left="118" Canvas.Top="47" FontSize="14" Content="Открыть въезд" x:Name="way_check1" Click="way_check1_Click" Width="117" Height="40"  />
+                                            <Button Template="{DynamicResource ButtonTemplate}" Canvas.Left="118" Canvas.Top="93" FontSize="14" Content="Открыть полосу" x:Name="way_check2" Click="way_check2_Click" Height="40" Width="117"  />
+                                            <Button Template="{DynamicResource ButtonTemplate}" Canvas.Left="364" FontSize="14" Content="Открыть выезд" x:Name="group_way" Click="group_way_Click" Width="114" Height="40" Canvas.Top="2"  />
+                                        </Canvas>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="PayingMoney" Header="PayMoney" Height="22" VerticalAlignment="Bottom">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,-11,0,10"/>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="0,0,0,-1"/>
+                                        <Rectangle Fill="#FF646464" RadiusX="10" RadiusY="10" Margin="8,257,6,10"/>
+                                        <Canvas x:Name="Calculate1_Copy2" Margin="373,278,28,22">
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="149" Width="61" FontSize="30" Content="1" x:Name="b1utton30"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="149" Width="61" FontSize="30" Content="2" x:Name="b1utton31"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="149" Width="61" FontSize="30" Content="3" x:Name="b1utton32"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="74" Width="61" FontSize="30" Content="4" x:Name="b1utton33"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="74" Width="61" FontSize="30" Content="5" x:Name="b1utton34"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="74" Width="61" FontSize="30" Content="6" x:Name="b1utton35"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Width="61" FontSize="30" Content="7" x:Name="b1utton36"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Width="61" FontSize="30" Content="8" x:Name="b1utton37"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Width="61" FontSize="30" Content="9" x:Name="b1utton38"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="222" Width="61" FontSize="30" Content="," x:Name="b1utton_float3"  Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM2" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="222" Width="61" FontSize="30" Content="Õ" x:Name="b1utton_back3" Click="button_backClick2"  Height="61"  FontFamily="Wingdings" FontWeight="ExtraBold" />
+                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="222" Width="61" FontSize="30" Content="0" x:Name="b1utton39"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click2" />
+                                        </Canvas>
+                                        <TextBox x:Name="calculate_box2"  FontFamily="Arial Black" TextChanged="enter_pass_TextChanged" GotFocus="enter_pass_GotFocus" Cursor="No" IsHitTestVisible="True" Foreground="#FF3A3A3A" HorizontalAlignment="Left" TextAlignment="Right" Height="50" Margin="90,278,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="221" FontSize="39" FontWeight="Bold"/>
+                                        <Label x:Name="lab_Copy12" Padding="0" HorizontalContentAlignment="Center" FontSize="22" Foreground="#FFC5C5C5" Content="Выплатить деньги" Margin="204,2,207,546"/>
+                                        <Label x:Name="lab_Copy13" Padding="0" HorizontalContentAlignment="Center" FontSize="25" Foreground="#FFC5C5C5" Content="сумма:" Margin="-1,291,520,257"/>
+                                        <Label x:Name="lab_Copy14" Padding="0" HorizontalContentAlignment="Left" FontSize="25" Foreground="#FFC5C5C5" Content="руб." Margin="316,293,243,255"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" x:Name="Input_money_Copy" Content="Выплатить" FontSize="16"  Margin="80,483,346,39" Click="Input_money_Copy_Click"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="contrWay1" Header="contrway1">
+                                    <Grid>
+                                        <Rectangle Fill="#FF7C7C7C" RadiusX="10" RadiusY="10" Margin="-1,1,1,-2"/>
+                                        <MediaElement x:Name="mediaElement5" HorizontalAlignment="Left" Height="377" VerticalAlignment="Top" Width="502" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="54,37,0,0"/>
+                                        <Label x:Name="label_options_Copy" Padding="0" FontSize="22" Foreground="#FFC5C5C5" Content="Управление полосой" Margin="198,0,169,551"/>
+                                        <Image x:Name="greenX_png" Margin="412,420,57,110" Source="Images/greenX.png" Stretch="Fill" Visibility="Hidden"/>
+                                        <Image x:Name="greenway_png" Margin="231,425,237,109" Source="Images/greenway.png"  Visibility="Hidden" Stretch="Fill"/>
+                                        <Image x:Name="greencross_png" Margin="56,420,411,109" Source="Images/greencross.png"  Visibility="Hidden" Stretch="Fill"/>
+                                        <Image x:Name="redcross_png" Margin="57,419,411,111" Source="Images/redcross.png" Stretch="Fill"/>
+                                        <Image x:Name="redX_png" Margin="412,419,57,109" Source="Images/redX.png" Stretch="Fill" />
+                                        <Image x:Name="redway_png" Margin="230,432,237,109" Source="Images/redway.png" Stretch="Fill"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="13" Content="Светофор на навесе" x:Name="greenlight" Margin="56,477,412,69" Click="greenlight_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="13" Content="Выездной шлагбаум" x:Name="gatetumb" Margin="230,477,238,69" Click="gatetumb_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="13" Content="Прием оплаты" x:Name="getpayment" Margin="413,477,55,69" Click="getpayment_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="13" Content="Открыть полосу" x:Name="closeway" Margin="230,527,238,19" Click="closeway_Click" />
+
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Canvas>
+                    </Grid>
+                </TabItem>
+                <TabItem Name="LeftPanel" Header="LeftPanel" Margin="5,14,-5,-16" HorizontalAlignment="Left" Width="64" Height="22" VerticalAlignment="Top">
+                    <Grid Opacity="1"  Height="600" Width="800" Background="#FF3A3A3A"  >
+                        <Canvas Name="left_main" HorizontalAlignment="Left" Height="600" VerticalAlignment="Top" Width="800" Background="#FF3A3A3A" Opacity="1" Margin="-3,0,0,0" >
+                            <Canvas Name="rightPartPanel">
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="10"  Width="156" FontSize="16" Content="полоса 1" x:Name="road_left" />
+                                <Canvas x:Name="TimePanel2" Canvas.Top="551" Height="44" Width="161" Canvas.Left="624">
+                                    <Label x:Name="timelabel1" Content="18:24" Height="44" Foreground="#FFB0B0B0" Canvas.Left="78" Width="83" FontSize="28" FontFamily="Segoe UI" FontWeight="Bold" />
+                                    <Label x:Name="datelabel1" Content="25.12.2013 " Foreground="#FFB0B0B0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="69" FontSize="12" Canvas.Left="4" Canvas.Top="4"/>
+                                </Canvas>
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="129"  Width="156" FontSize="16" Content="добавить ТС" x:Name="addTS" Click="addTS_Click" IsEnabled="False" />
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="39"  Canvas.Left="634" Canvas.Top="246"  Width="156" FontSize="16" Content="изменить класс" x:Name="change_class" IsEnabled="False" Click="change_class_Click" />
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="290"  Width="156" FontSize="16" Content="добавить сцепку" x:Name="add_scep" IsEnabled="False" />
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="337"  Width="156" FontSize="16" Content="удалить ТС" x:Name="deleteTS" IsEnabled="False" Click="deleteTS_Click" />
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="464"  Width="156" FontSize="16" Content="касса >" x:Name="go_cash" />
+                                <Button Template="{DynamicResource ButtonTemplate}" Height="37"  Canvas.Left="634" Canvas.Top="509"  Width="156" FontSize="16" Content="управление >" x:Name="options_work" Click="options_work_Click" />
+                            </Canvas>
+                            <TabControl x:Name="LeftPanels" Height="617" Width="623" BorderThickness="0" Background="#FF3A3A3A" Canvas.Top="-20" Canvas.Left="2">
+                                <TabItem Name="MainWind" Header="MainWindow" Margin="318,0,-322,-2">
+                                    <Grid Background="#FF404040">
+                                        <Image x:Name="polosa_png" Height="74" Canvas.Left="7" Source="Images/polosa.png" Stretch="Fill" Canvas.Top="9" Margin="2,5,5,512"/>
+                                        <Image x:Name="video_png" Height="429" Canvas.Left="7" Source="Images/video.png" Stretch="Fill" Canvas.Top="88" Margin="2,82,4,80"/>
+                                        <Image x:Name="gate_close_png" Height="73" Canvas.Left="5" Source="Images/gate_close.png" Stretch="Fill" Canvas.Top="520" Width="613" Margin="2,515,4,3"/>
+                                        <MediaElement x:Name="mediaElement1" Height="393" Canvas.Left="52" Canvas.Top="114" Width="518" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="50,110,51,88"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="Work" Header="work" Margin="326,0,-330,-2">
+                                    <Grid Background="#FF404040">
+                                        <Image x:Name="gate_close_png_Copy" Height="73" Source="Images/gate_close.png" Stretch="Fill" Width="613" Margin="0,515,6,3"/>
+                                        <Image x:Name="oplata_png" Source="Images/oplata.png" Stretch="Fill" Margin="0,435,6,77"/>
+                                        <Rectangle Fill="#FF929496" RadiusX="10" RadiusY="10" Margin="0,5,6,159"/>
+                                        <Image x:Name="classts_png" Source="Images/classts.png" Stretch="Fill" Margin="19,5,452,565"/>
+                                        <MediaElement x:Name="mediaElement3" Canvas.Left="52" Canvas.Top="114" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="51,48,269,316"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="подтвердить класс" x:Name="accept_class" Margin="392,323,45,212" Click="accept_class_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="70" Content="1" x:Name="class_but" Margin="152,301,374,196" Click="class_but_Click" />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem  Name="Pay" Header="Pay" Margin="324,0,-328,-2">
+                                    <Grid Background="#FF404040">
+                                        <Image x:Name="polosa_png_Copy" Height="74" Source="Images/polosa.png" Stretch="Fill" Margin="-1,5,8,512"/>
+                                        <Rectangle Fill="#FF929496" RadiusX="10" RadiusY="10" Height="427" Margin="4,83,4,81"/>
+                                        <Image x:Name="gate_close_png_Copy1" Height="73" Source="Images/gate_close.png" Stretch="Fill" Width="613" Margin="2,515,4,3"/>
+                                        <TabControl x:Name="tabControl" Background="#FF929496" HorizontalAlignment="Left" Height="392" Margin="10,112,0,0" VerticalAlignment="Top" Width="599" BorderThickness="0">
+                                            <TabItem Name="Nal" Background="#FF929496"  Margin="357,18,-361,-17" BorderThickness="1" BorderBrush="Transparent" IsSelected="True" >
+                                                <TabItem.Header >
+                                                    <Image Source="Images/money_cash.png" Width="49"  Height="53" HorizontalAlignment="Left"  RenderTransformOrigin="0.577,0.862"></Image>
+                                                </TabItem.Header>
+                                                <Grid  Margin="0,17,0,0">
+                                                    <Rectangle Fill="#FF6E6E6E" RadiusX="10" RadiusY="10"/>
+                                                    <Canvas x:Name="Calculate1_Copy" Margin="354,19,31,12">
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="149" Width="61" FontSize="30" Content="1" x:Name="b1utton10"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="149" Width="61" FontSize="30" Content="2" x:Name="b1utton11"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="149" Width="61" FontSize="30" Content="3" x:Name="b1utton12"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="74" Width="61" FontSize="30" Content="4" x:Name="b1utton13"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="74" Width="61" FontSize="30" Content="5" x:Name="b1utton14"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="74" Width="61" FontSize="30" Content="6" x:Name="b1utton15"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Width="61" FontSize="30" Content="7" x:Name="b1utton16"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Width="61" FontSize="30" Content="8" x:Name="b1utton17"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Width="61" FontSize="30" Content="9" x:Name="b1utton18"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="222" Width="61" FontSize="30" Content="," x:Name="b1utton_float1"  Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM3" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="222" Width="61" FontSize="30" Content="Õ" x:Name="b1utton_back1" Click="button_backClick3"  Height="61"  FontFamily="Wingdings" FontWeight="ExtraBold" />
+                                                        <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="222" Width="61" FontSize="30" Content="0" x:Name="b1utton19"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click3" />
+                                                    </Canvas>
+                                                    <TextBox x:Name="calculate_box3"  Foreground="#FF7A7A7A"  HorizontalAlignment="Left" Height="44" Margin="143,32,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="140" FontSize="39" FontWeight="Bold" IsReadOnly="True" TextAlignment="Right" TextChanged="calculate_box1_Copy_TextChanged" FontFamily="Arial Black"/>
+                                                    <Label x:Name="lab_Copy2" Padding="0" HorizontalContentAlignment="Center" FontSize="25" Foreground="#FFC5C5C5" Content="сумма:" Margin="5,37,498,242"/>
+                                                    <Label x:Name="lab_Copy3" Padding="0" HorizontalContentAlignment="Left" FontSize="25" Foreground="#FFC5C5C5" Content="руб." Margin="288,43,255,236"/>
+                                                    <Label x:Name="lab_Copy4" Padding="0" HorizontalContentAlignment="Left" FontSize="25" Foreground="#FFC5C5C5" Content="руб." Margin="288,104,255,175"/>
+                                                    <Label x:Name="lab_Copy6" Padding="0" HorizontalContentAlignment="Center" FontSize="25" Foreground="#FFC5C5C5" Content="сдача:" Margin="2,103,501,176"/>
+                                                    <Label x:Name="cashval" HorizontalContentAlignment="Right" Foreground="#FFC5C5C5" Content="0" FontFamily="Arial Black" FontSize="39" Margin="182,89,313,175" RenderTransformOrigin="0.5,0.5"/>
+                                                    <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="оплатить проезд" x:Name="payWay" Margin="42,223,369,31" Click="payWay_Click" />
+                                                    <Label x:Name="lab_Copy7" Padding="0" HorizontalContentAlignment="Center" FontSize="25" Foreground="#FFC5C5C5" Content="сумма:" Margin="5,37,498,242"/>
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Name="Card" Background="#FF929496" Margin="360,18,-362,-17" IsSelected="True">
+                                                <TabItem.Header  >
+                                                    <Image Source="Images/bsk_cash.png" Width="99"  Height="48" HorizontalAlignment="Left"  RenderTransformOrigin="0.577,0.862" Stretch="UniformToFill">
+                                                        <Image.OpacityMask>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="Black" Offset="0"/>
+                                                                <GradientStop Color="White" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Image.OpacityMask>
+                                                    </Image>
+                                                </TabItem.Header>
+                                                <Grid  Margin="0,19,0,0">
+                                                    <Rectangle Fill="#FF6E6E6E" RadiusX="10" RadiusY="10" Margin="0,-2,0,0" />
+                                                    <Canvas Name="mw" >
+                                                        <Canvas x:Name="Calculate1_Copy1" Margin="354,17,31,12">
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="149" Width="61" FontSize="30" Content="1" x:Name="b1utton20"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="149" Width="61" FontSize="30" Content="2" x:Name="b1utton21"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="149" Width="61" FontSize="30" Content="3" x:Name="b1utton22"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="74" Width="61" FontSize="30" Content="4" x:Name="b1utton23"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="74" Width="61" FontSize="30" Content="5" x:Name="b1utton24"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="74" Width="61" FontSize="30" Content="6" x:Name="b1utton25"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Width="61" FontSize="30" Content="7" x:Name="b1utton26"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Width="61" FontSize="30" Content="8" x:Name="b1utton27"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Width="61" FontSize="30" Content="9" x:Name="b1utton28"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Top="222" Width="61" FontSize="30" Content="," x:Name="b1utton_float2"  Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM4" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="150" Canvas.Top="222" Width="61" FontSize="30" Content="Õ" x:Name="b1utton_back2" Click="button_backClick4"  Height="61"  FontFamily="Wingdings" FontWeight="ExtraBold" />
+                                                            <Button  Template="{DynamicResource ButtonTemplate}" Canvas.Left="74" Canvas.Top="222" Width="61" FontSize="30" Content="0" x:Name="b1utton29"       Height="61" FontWeight="Bold" FontFamily="Arial Black" Click="buttonNUM_Click4" />
+                                                        </Canvas>
+                                                        <TextBox x:Name="calculate_box4"  Foreground="#FF8D8D8D" HorizontalAlignment="Left"  Height="44" Margin="27,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" FontSize="22" Text="или введите штрих-код" TextChanged="cb4_TextChanged" Background="White" GotFocus="cb4_GotFocus"/>
+                                                        <Label x:Name="lab_Copy11" Padding="0" HorizontalContentAlignment="Left" FontSize="16" Foreground="#FFC5C5C5" Content="Приложите БСК к&#xD;&#xA;считывателю, если карта не&#xD;&#xA;прочиталась, то считайте&#xD;&#xA;штрих-код, расположенный&#xD;&#xA;на тыльной стороне карты" Margin="26,56,340,127" FontWeight="SemiBold"/>
+
+                                                    </Canvas>
+                                                    <Canvas Name="mw2" Visibility="Hidden"  >
+                                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="оплатить проезд" x:Name="payWay1" Height="50" Canvas.Left="53" Canvas.Top="240" Width="179" Click="payWay1_Click_1" />
+                                                        <Image x:Name="pb1_png" Height="229" Canvas.Left="18" Source="images/pb1.png" Stretch="Fill" Canvas.Top="11" Width="453"/>
+                                                        <Label x:Name="balanseCD" HorizontalContentAlignment="Right" Foreground="#FFC5C5C5" Content="100" FontFamily="Arial Black" FontSize="39" Canvas.Left="106" Canvas.Top="29" RenderTransformOrigin="0.105,-0.077" Width="147"/>
+                                                        <Label x:Name="numberCD" FontSize="20" Foreground="#FFC5C5C5" Content="Label" Canvas.Left="341" Canvas.Top="86" RenderTransformOrigin="0.105,-0.077"/>
+                                                        <Label x:Name="dateCD"  FontSize="20" Foreground="#FFC5C5C5" Content="Label" Canvas.Left="343" Canvas.Top="180" RenderTransformOrigin="0.105,-0.077"/>
+                                                        <Label x:Name="dateOutCD" FontSize="20" Foreground="#FFC5C5C5" Content="Label" Canvas.Left="343" Canvas.Top="127" RenderTransformOrigin="0.105,-0.077"/>
+
+                                                    </Canvas>
+
+                                                </Grid>
+                                            </TabItem>
+                                            <TabItem Background="#FF929496" Margin="362,18,-364,-17">
+                                                <TabItem.Header >
+                                                    <Image Source="Images/card_cash.png" Width="41"  Height="48" HorizontalAlignment="Left"  RenderTransformOrigin="0.577,0.862"></Image>
+                                                </TabItem.Header>
+                                                <Grid Margin="0,16,0,0">
+                                                    <Rectangle Fill="#FF6E6E6E" RadiusX="10" RadiusY="10" Margin="0,1,0,-1" />
+                                                </Grid>
+                                            </TabItem>
+                                        </TabControl>
+                                        <Label x:Name="lab_Copy8" Padding="0" HorizontalContentAlignment="Left" FontSize="25" Foreground="#FFC5C5C5" Content="руб." Margin="296,139,271,419"/>
+                                        <Label x:Name="moneyvalue" Foreground="#FFC5C5C5" Content="100" FontFamily="Arial Black" FontSize="39" Margin="210,124,322,419"/>
+                                        <Label x:Name="lab_Copy9" Padding="0" HorizontalContentAlignment="Center" FontSize="23" Foreground="#FFC5C5C5" Content="к оплате:" Margin="17,141,505,417"/>
+                                        <Label x:Name="lab_Copy10" Padding="0" HorizontalContentAlignment="Center" FontSize="13" Foreground="#FFC5C5C5" Content="полный дневной тариф" Margin="12,130,449,428"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="Classpanel" Header="ClassPanel" Margin="324,0,-328,-2">
+                                    <Grid Background="#FF404040">
+                                        <Rectangle Fill="#FF929496" RadiusX="10" RadiusY="10" Margin="0,5,6,159"/>
+                                        <Image x:Name="gate_close_png_Copy2" Height="73" Source="Images/gate_close.png" Stretch="Fill" Width="613" Margin="0,515,6,3"/>
+                                        <Image x:Name="oplata_png_Copy" Source="Images/oplata.png" Stretch="Fill" Margin="0,435,6,77"/>
+                                        <MediaElement x:Name="mediaElement6" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="110,26,211,339"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="70" Content="1" x:Name="class_but_1" Margin="46,304,480,193" Click="class_but_1_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="45" Content="2" x:Name="class_but_2" Margin="168,320,387,210" Click="class_but_2_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="45" Content="3" x:Name="class_but_3" Margin="278,320,277,210" Click="class_but_3_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="45" Content="4" x:Name="class_but_4" Margin="384,320,171,210" Click="class_but_4_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="45" Content="(" x:Name="class_but_spec" Margin="495,320,60,210" FontFamily="Wingdings" Click="class_but_spec_Click"  />
+
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="SpecPanel" Header="SpecPanel" Margin="324,0,-328,-2">
+                                    <Grid Background="#FF404040">
+                                        <Image x:Name="gate_close_png_Copy22" Height="73" Source="Images/gate_close.png" Stretch="Fill" Width="613" Margin="0,515,6,3"/>
+                                        <Image x:Name="oplata1_png" Source="Images/oplata.png" Stretch="Fill" Margin="0,435,6,77"/>
+                                        <Rectangle Fill="#FF929496" RadiusX="10" RadiusY="10" Margin="0,5,6,159"/>
+                                        <Image x:Name="classts1_png" Source="Images/classts.png" Stretch="Fill" Margin="19,5,452,565"/>
+                                        <MediaElement x:Name="mediaElement4" Canvas.Left="52" Canvas.Top="114" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="51,48,269,316" IsMuted="True"/>
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="выпустить" x:Name="get_out" Margin="392,323,45,212" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="70" Content="(" FontFamily="Wingdings" x:Name="class_but1" Margin="152,301,374,196" Click="class_but1_Click" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="Скорая помощь" x:Name="speccar1" Margin="392,48,45,502" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="Полиция" x:Name="speccar2" Margin="392,94,45,456" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="ФЗ-257" x:Name="speccar3" Margin="392,141,45,413" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="Подрядчик" x:Name="speccar4" Margin="392,187,45,367" />
+                                        <Button Template="{DynamicResource ButtonTemplate}" FontSize="16" Content="По ведомости" x:Name="speccar5" Margin="392,233,45,321" />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Name="Finish" Header="work" Margin="326,0,-330,-2">
+                                    <Grid Background="#FF404040">
+                                        <Image x:Name="_15_png" Source="images/15.png" Stretch="Fill"/>
+                                        <MediaElement x:Name="mediaElement7" Canvas.Left="52" Canvas.Top="114" LoadedBehavior="Manual" UnloadedBehavior="Manual" Stretch="Fill" Margin="160,112,159,253"/>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                            <Canvas Name="worklittlepanel" Height="66" Canvas.Left="628" Canvas.Top="51" Width="162">
+                                <Image x:Name="close_road_thing_png" Height="27" Canvas.Left="34" Source="Images/close_road_thing.png" Stretch="Fill" Width="97" Canvas.Top="3"/>
+                                <Image x:Name="open_road_thing_png" Height="27" Canvas.Left="34" Source="Images/open_road_thing.png" Stretch="Fill" Width="97" Visibility="Collapsed" Canvas.Top="3"/>
+                                <Image x:Name="noway_png" Height="30" Source="Images/noway.png" Stretch="Fill" Width="33" Canvas.Left="1"/>
+                                <Image x:Name="yesway_png" Height="30" Source="Images/yesway.png" Stretch="Fill" Width="33" Visibility="Collapsed" Canvas.Left="1"/>
+                                <Image x:Name="whiteroundthingnoway_png" Height="29" Canvas.Left="131" Source="Images/whiteroundthingnoway.png" Stretch="Fill" Canvas.Top="1" Width="31"/>
+                                <Image x:Name="whiteroundthingyesway_png" Height="29" Canvas.Left="131" Source="Images/whiteroundthingyesway.png" Stretch="Fill" Visibility="Collapsed" Canvas.Top="1" Width="31"/>
+                                <Image x:Name="labpng" Height="41" Canvas.Left="65" Source="Images/4.png" Stretch="Fill" Canvas.Top="28" Width="32" RenderTransformOrigin="0.422,-0.854"/>
+                                <Label x:Name="countlabel1" Foreground="White" Content="0" Height="29" Canvas.Left="64" HorizontalContentAlignment="Center" Canvas.Top="31" Width="36" FontFamily="Arial Black" FontSize="18"/>
+                            </Canvas>
+
+                        </Canvas>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Button x:Name="ttdBut" Template="{DynamicResource ButtonTemplate}" Content="U" HorizontalAlignment="Left" Margin="10,0,0,422" VerticalAlignment="Bottom" Width="50" Height="44" FontFamily="Webdings" FontSize="36" Click="ttdBut_Click"/>
+            <Image x:Name="bskimg" Width="250" Height="160" Source="Images/bsk.png"  VerticalAlignment="Top" Margin="1082,10,26,0"/>
+            <Canvas Name="moneycheckbox" Width="250"   VerticalAlignment="Center" Margin="1088,196,29,371" Height="170">
+                <Image x:Name="moneycheck" Width="250"  Source="Images/moneycheck.png" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                <Image x:Name="truefalse" Source="images/false.png" Stretch="Fill" Height="50" Canvas.Left="63" Canvas.Top="19" Visibility ="Collapsed" Width="123"/>
+            </Canvas>
+
+            <Canvas  Width="250" Height="330"  VerticalAlignment="Bottom" Margin="1088,0,29,16">
+                <Image x:Name="_12344_png" Width="250" Height="330" Source="Images/cardreader.png" Stretch="Fill"  />
+                <Label x:Name="label" Content="" HorizontalContentAlignment="Center" Canvas.Left="27" Canvas.Top="50" Height="32" Width="174" FontFamily="Arial Black"/>
+
+            </Canvas>
+
+
+
+
+            <Rectangle Name="Driver" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="63"/>
+            <Canvas Name="MoneyBox" HorizontalAlignment="Center" Height="103"  VerticalAlignment="Stretch" Width="800" Margin="278,618,280,16">
+                <Image x:Name="moneycash_png" Source="Images/moneybox.png" Stretch="Fill" Height="103" Width="800"/>
+                <Label x:Name="mb" Content="0123456789" HorizontalAlignment="Left" Height="47"  HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="192" FontFamily="OCR A Extended" FontSize="30"  Foreground="#FF00FF2E" Canvas.Left="582" Canvas.Top="16"/>
+                <Label x:Name="label7" Content="Label" Canvas.Left="599" Canvas.Top="68" Width="158" Foreground="White"/>
+            </Canvas>
+            <Image x:Name="ScanTool" Height="180" Width="150" Margin="90,190,1119,356" VerticalAlignment="Center" Source="images/skan.png" Stretch="Fill"/>
+            <Canvas Name="thumb2" Margin="42,36,1114,547" Width="202"  Height="154">
+                <Image x:Name="card" Source="Images/card.png" Stretch="Fill" Height="154" Width="202" />
+                <Label x:Name="mb1" Content="0123456789" HorizontalAlignment="Left" Height="47"  HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="202" FontFamily="OCR A Extended" FontSize="20"  Canvas.Top="107"/>
+                <Thumb Visibility="Visible" Cursor="Hand"  Opacity="0.01" Name="thumb2move" DragDelta="thumb2_DragDelta" DragStarted="thumb2_DragStarted" DragCompleted="thumb2_DragCompleted" Height="154" Width="202"  />
+
+            </Canvas>
+            <Canvas Name="thumb3" Margin="568,525,597,58" Width="202"  Height="154">
+                <Image x:Name="money" Source="Images/money.png" Stretch="Fill" Height="154" Width="202" />
+                <Label x:Name="mb3" Content="0123456789" HorizontalAlignment="Left" Height="47"  HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="184" FontFamily="OCR A Extended" FontSize="25"  Canvas.Left="10" Canvas.Top="102"/>
+                <Thumb Visibility="Visible" Cursor="Hand"  Opacity="0.01" Name="thumb3move" DragDelta="thumb3_DragDelta" DragStarted="thumb3_DragStarted" DragCompleted="thumb3_DragCompleted" Height="154" Width="202"  />
+            </Canvas>
+            <Image x:Name="card_cash_png" Margin="10,215,1294,470" Width="50" Height="50" HorizontalAlignment="Left" Source="images/card_cash.png"  MouseEnter="card_cash_png_MouseEnter"/>
+            <Image x:Name="CheckBox_png" Width="252" Height="330" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,16" Source="images/CheckBox.png" Stretch="Fill"/>
+
+            <Canvas Name="thumb4" Margin="46,347,1143,175" Visibility="Hidden"  Height="212" Width="177" HorizontalAlignment="Left" VerticalAlignment="Top" MouseEnter="thumb4_MouseEnter" MouseLeave="thumb4_MouseLeave">
+                <Image x:Name="cashimg" Source="Images/cash.png" Stretch="Fill" Height="212" Width="177" />
+                <Thumb Visibility="Visible" Cursor="Hand"  Opacity="0.01" Name="thumb4move" DragDelta="thumb4_DragDelta" DragStarted="thumb4_DragStarted" DragCompleted="thumb4_DragCompleted" Height="212" Width="177"   />
+            </Canvas>
+            <Canvas Name="thumb1" Visibility="Hidden" Width="202"  Height="154" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,215,0,0" MouseLeave="thumb1_MouseLeave">
+
+                <Thumb Visibility="Visible" Cursor="Hand" Height="154"  Opacity="1" Name="th1" DragDelta="thumb1_DragDelta" DragStarted="thumb1_DragStarted" DragCompleted="thumb1_DragCompleted" Width="202" >
+                    <Thumb.Background>
+                        <ImageBrush ImageSource="Images/bsk.png"/>
+                    </Thumb.Background>
+                </Thumb>
+            </Canvas>
+            <Canvas Name="messages"  Height="600" Width="1000" Margin="282,36,85,101" Visibility="Hidden" >
+                <Rectangle Fill="#FF929496" Height="600" Width="1000" RadiusX="10" RadiusY="10" />
+                <Rectangle Fill="White" Height="538" Width="928" RadiusX="10" RadiusY="10" Canvas.Left="32" Canvas.Top="28"/>
+                <Label x:Name="label8" Content="" Canvas.Left="66" Canvas.Top="58" Width="835" Height="244" FontSize="30" FontFamily="Consolas"/>
+                <Canvas Name="DriverMes" Height="600" Width="1000" >
+                    <Rectangle Fill="White" Height="538" Width="928" RadiusX="10" RadiusY="10" Canvas.Left="32" Canvas.Top="28"/>
+                    <Button x:Name="MoneyGen" Template="{DynamicResource ButtonTemplate}"  Content="Попросить расплатиться наличкой" HorizontalAlignment="Left" VerticalAlignment="Top" Width="828" Height="87" FontFamily="Century" FontSize="25" Canvas.Left="76" Canvas.Top="53" Click="MoneyGen_Click"/>
+                </Canvas>
+            </Canvas>
+
+
+
+        </Grid>
+        <Grid Name="options"  Visibility="Hidden" Background="#FF272727">
+            <Button x:Name="start_tr" Template="{DynamicResource ButtonTemplate}"  Content="Запустить тренажер" HorizontalAlignment="Left" Margin="48,127,0,0" VerticalAlignment="Top" Width="404" Height="87" Click="start" FontFamily="Century" FontSize="36"/>
+            <Button x:Name="options_but" Template="{DynamicResource ButtonTemplate}"  Content="Настройки" HorizontalAlignment="Left" Margin="48,241,0,0" VerticalAlignment="Top" Width="404" Height="87" FontFamily="Century" FontSize="36" Click="options_but_Click"/>
+            <Button x:Name="about" Template="{DynamicResource ButtonTemplate}"  Content="О программе" HorizontalAlignment="Left" Margin="48,359,0,0" VerticalAlignment="Top" Width="404" Height="87" FontFamily="Century" FontSize="36" Click="about_Click"/>
+            <TabControl x:Name="optContr"  Visibility="Hidden"  Background="#FF272727" HorizontalAlignment="Left" Height="662" Margin="522,18,0,0" VerticalAlignment="Top" Width="798" BorderThickness="0">
+                <TabItem Name="Opt1"  Visibility="Hidden" Header="TabItem" >
+                    <Grid>
+                        <Rectangle Fill="#FFA0A0A0" RadiusX="20" RadiusY="20" Margin="0,-2,0,0" />
+                        <RadioButton x:Name="rb1" Content="старая версия" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" Margin="42,56,0,0"/>
+                        <RadioButton x:Name="rb2" Content="новая версия" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" Margin="42,36,0,0"/>
+                        <Button x:Name="OKbut" Template="{DynamicResource ButtonTemplate}"  Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="49" FontFamily="Century" FontSize="25" Margin="30,577,0,0" Click="OKbut_Click"/>
+                        <Button x:Name="CancelBut" Template="{DynamicResource ButtonTemplate}"  Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="49" FontFamily="Century" FontSize="25" Margin="407,577,0,0" Click="OKbut_Click"/>
+                        <Canvas  Height="234" Canvas.Top="85" Width="372" Canvas.Left="72" Margin="42,104,380,298" >
+                            <Rectangle Fill="#FFCBCBCB" RadiusX="20" RadiusY="20" Height="279"  Width="372"  />
+                            <TextBox x:Name="pay1stclassday" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextAlignment="Right" FontSize="18" FontFamily="Arial" Canvas.Left="194" Canvas.Top="62" RenderTransformOrigin="0.592,-0.696"/>
+                            <TextBox x:Name="pay2stclassday" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextAlignment="Right" FontSize="18" FontFamily="Arial" Canvas.Left="194" Canvas.Top="101"/>
+                            <TextBox x:Name="pay3stclassday" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextAlignment="Right" FontSize="18" FontFamily="Arial" Canvas.Left="194" Canvas.Top="143"/>
+                            <TextBox x:Name="pay4stclassday" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextAlignment="Right" FontSize="18" FontFamily="Arial" Canvas.Left="194" Canvas.Top="184"/>
+                            <Label x:Name="label1" Content="Настройки стоимости" Canvas.Left="10" Canvas.Top="10" Width="138"/>
+                            <Label x:Name="label2" Content="Первый класс" Canvas.Left="88" Canvas.Top="62" Width="101"/>
+                            <Label x:Name="label3" Content="Второй класс" Canvas.Left="88" Canvas.Top="101" Width="101"/>
+                            <Label x:Name="label4" Content="Третий класс" Canvas.Left="88" Canvas.Top="143" Width="101"/>
+                            <Label x:Name="label5" Content="Четвертый класс" Canvas.Left="88" Canvas.Top="184" Width="101"/>
+                            <Label x:Name="label6" Content="руб." Canvas.Left="319" Canvas.Top="62" Height="26"/>
+                            <Label x:Name="label6_Copy" Content="руб." Canvas.Left="319" Canvas.Top="101" Height="26"/>
+                            <Label x:Name="label6_Copy1" Content="руб." Canvas.Left="319" Canvas.Top="143" Height="26"/>
+                            <Label x:Name="label6_Copy2" Content="руб." Canvas.Left="319" Canvas.Top="184" Height="26"/>
+                            <TextBox x:Name="validations" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" TextAlignment="Right" FontSize="18" FontFamily="Arial" Canvas.Left="194" Canvas.Top="225"/>
+                            <Label x:Name="label5_Copy" Content="Сумма не требующая &#xD;&#xA;проверки подлинности:" Canvas.Left="49" Canvas.Top="216" Width="168"/>
+                            <Label x:Name="label6_Copy3" Content="руб." Canvas.Left="319" Canvas.Top="225" Height="26"/>
+                        </Canvas>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Name="Opt2" Header="TabItem" Visibility="Hidden">
+                    <Grid>
+                        <Rectangle Fill="#FFA0A0A0" RadiusX="20" RadiusY="20" Margin="0,-2,0,0" />
+                        <Button x:Name="OKbut1" Template="{DynamicResource ButtonTemplate}"  Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="49" FontFamily="Century" FontSize="25" Margin="30,577,0,0" Click="OKbut_Click"/>
+                        <Button x:Name="CancelBut1" Template="{DynamicResource ButtonTemplate}"  Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="49" FontFamily="Century" FontSize="25" Margin="407,577,0,0" Click="OKbut_Click"/>
+
+                    </Grid>
+                </TabItem>
+
+
+            </TabControl>
+
+        </Grid>
+    </Grid>
+
+</Window>

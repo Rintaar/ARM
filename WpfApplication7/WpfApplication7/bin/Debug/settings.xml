@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropsFields xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <XMLFileName>C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\bin\Debug\settings.xml</XMLFileName>
+  <TextValue1>Testing XML File Settings</TextValue1>
+  <firstclassday>10000</firstclassday>
+  <secondclassday>20000</secondclassday>
+  <thirdclassday>30000</thirdclassday>
+  <forthclassday>40000</forthclassday>
+  <validation>0</validation>
+</PropsFields>

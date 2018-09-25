@@ -1,0 +1,14 @@
+c:\users\blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\bin\Debug\WpfApplication7.exe.config
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\bin\Debug\WpfApplication7.exe
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\bin\Debug\WpfApplication7.pdb
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\MainWindow.g.cs
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\App.g.cs
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7_MarkupCompile.cache
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7_MarkupCompile.lref
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\MainWindow.baml
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.g.resources
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.Properties.Resources.resources
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.csproj.GenerateResource.Cache
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.exe
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.pdb
+C:\Users\Blackwhiter\documents\visual studio 2015\Projects\WpfApplication7\WpfApplication7\obj\Debug\WpfApplication7.csprojResolveAssemblyReference.cache
